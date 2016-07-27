@@ -8,7 +8,6 @@ using System.Web.Http;
 
 namespace AsiHackathonTest.Controllers
 {
-    [Authorize]
     public class ReservationsController : ApiController
     {
         private Reservation[] Reservations = new Reservation[] {
