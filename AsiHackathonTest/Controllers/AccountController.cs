@@ -73,7 +73,7 @@ namespace AsiHackathonTest.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
-
+        /*
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
@@ -112,7 +112,7 @@ namespace AsiHackathonTest.Controllers
                 Logins = logins,
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
-        }
+        }*/
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
@@ -152,7 +152,7 @@ namespace AsiHackathonTest.Controllers
 
             return Ok();
         }
-
+        /*
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
@@ -189,7 +189,7 @@ namespace AsiHackathonTest.Controllers
             }
 
             return Ok();
-        }
+        }*/
 
         // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
@@ -219,7 +219,7 @@ namespace AsiHackathonTest.Controllers
 
             return Ok();
         }
-
+        /*
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -316,7 +316,7 @@ namespace AsiHackathonTest.Controllers
             }
 
             return logins;
-        }
+        }*/
 
         // POST api/Account/Register
         [AllowAnonymous]
@@ -339,7 +339,7 @@ namespace AsiHackathonTest.Controllers
 
             return Ok();
         }
-
+        /*
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -371,6 +371,52 @@ namespace AsiHackathonTest.Controllers
                 return GetErrorResult(result); 
             }
             return Ok();
+        }
+        */
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("Login")]
+        public async Task<IHttpActionResult> Login(LoginViewModel model, string returnUrl)
+        {
+            await Task.FromResult(0);
+            return null;
+            /*
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            //TODO: determine if there is a more efficient way to allow user to login either with Email || UserName
+            if (model.UserName.Contains("@"))
+            {
+                using (var context = new ApplicationDbContext())
+                {
+                    model.UserName = (context.Users.Any(p => p.Email == model.UserName)) ?
+                      context.Users.SingleOrDefault(p => p.Email == model.UserName).UserName :
+                      model.UserName;
+                }
+            }
+
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await Microsoft.AspNet.Identity.Owin.SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: true);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+            */
         }
 
         protected override void Dispose(bool disposing)
